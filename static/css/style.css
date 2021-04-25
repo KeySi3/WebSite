@@ -14,7 +14,8 @@
 }
 
 .cen {
-    text-align: center
+    text-align: center;
+    color: #103CC1;
 }
 
 .line {
@@ -22,12 +23,12 @@
 }
 
 .text {
-    color: #5F5AC1
+    color: #5F5AC1;
 }
 
 .tablestyle {
     width: 880px;
-    background-color: #FFFFFF
+    background-color: #FFFFFF;
 }
 
 .trstyle {
@@ -45,7 +46,7 @@
 }
 
 .tablestyle1 {
-    width: 400px;
+    width: 460px;
     background-color: #FFFFFF
 }
 

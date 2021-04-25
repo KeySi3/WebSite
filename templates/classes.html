@@ -2,153 +2,452 @@
 
 {% block content %}
 <nav class="navbar navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="http://127.0.0.1:8080/program"><-- Назад</a>
-  </div>
+    <div class="container-fluid">
+        <a class="text" id="back"
+           ><-- Назад</a>
+        <img src="/static/img/logo1.png" style="height: 70px; width: 100px; margin-left: 300px;" alt="здесь должна была быть картинка, но не нашлась">
+        <p class="text" id="getnick"
+           style="margin-left: 230px; width: 190px">Вы авторизовались как {{nick}}</p>
+    </div>
 </nav>
 <ul class="nav">
-  <li class="nav-item">
-    <h2 class="text">Доступные классы:</h2>
-  </li>
-  <li class="nav-item">
-    <h2 class="text" style="margin-left: 210px">Добавление класса:</h2>
-  </li>
-</ul>
-<div>
-  <ul class="nav flex-column" style="margin-left: 500px">
     <li class="nav-item">
-      <nav class="nav">
-        <h4 class="text" style="margin-top: 5px">Название класса:</h4>
-        <textarea class="form-control text" id="exampleFormControlTextarea1" rows="1" style="resize: none; width: 200px; margin-left: 10px"></textarea>
-      </nav>
-    </li>
-    <li class="nav-item">
-      <nav class="nav">
-        <h4 class="text" style="margin-top: 20px">Файл с данными:</h4>
-        <form>
-          <div class="form-group" style="margin-top: 20px; margin-left: 10px">
-            <input type="file" class="form-control-file" id="exampleFormControlFile1">
-          </div>
-        </form>
-      </nav>
-    </li>
-    <li class="nav-item">
-      <nav class="nav">
-        <h4 class="text" style="margin-top: 5px">Шапка документа:</h4>
-        <div class="form-check" style="margin-left: 10px; margin-top: 10px">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault12">
-          <label class="form-check-label" for="flexRadioDefault1">
-            Нет
-          </label>
+        <div style="width:860px;">
+            <h3 id="available_classes" class="text" style="margin-top: 20px;float:left; width:350px;">Доступные классы:</h3>
+                        <h3 class="text" style="margin-top: 20px;float:right;width:350px;">Добавление класса:</h3>
+
+
         </div>
-        <div class="form-check" style="margin-left: 50px; margin-top: 10px">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault13">
-          <label class="form-check-label" for="flexRadioDefault1">
-            Да
-          </label>
-        </div>
-      </nav>
     </li>
-    <li class="nav-item">
-        <a class="btn btn-primary" href="#" role="button" style="width: 460px; margin-right: 10px; margin-top: 20px;">Добавить класс</a>
-    </li>
-    <li class="nav-item">
-      <label></label>
-    </li>
-    <li class="nav-item">
-      <h2 class="text">Экспорт класса:</h2>
-    </li>
+     <li class="nav-item">
+         <div style="width:860px;">
+             <nav class="nav" style="float:right; width: 350px">
+                <h4 class="text" style="margin-top: 10px;width: 200px;">Название класса:</h4>
+                <input onkeyup="clearing()" class="form-control text"
+                       id="class_name"
+                       style="resize: none; width: 140px; margin-left: 10px;height: 40px;color:#120a8f;"/>
+            </nav>
+             <label hidden style="resize: none; width: 350px;float:left;margin-top: 20px;">qwerty</label>
+         </div>
+
+     </li>
 
     <li class="nav-item">
-      <nav class="nav">
-        <h4 class="text" style="margin-top: 5px">Создать шапку класса:</h4>
-        <h4 class="text" style="margin-top: 5px; margin-left: 20px">Название файла:</h4>
-      </nav>
-    </li>
+        <div  style="width: 1015px;">
+        <nav class="nav" style="float:right;">
+                <h4 class="text" style="margin-top: 20px;margin-right: 0px">Файл с данными:</h4>
+                <form>
+                    <div class="form-group"
+                         style="margin-top: 20px; margin-left: 10px">
+                        <input type="file" class="form-control-file" accept=".xlsx"
+                               id="file" onchange ="clearing()" style="margin-right: 10px; margin-top: 20px;color: #1E90FF;">
+                    </div>
+                </form>
+            </nav>
+            <label hidden style="resize: none; width: 350px;float:left;margin-top: 20px;">qwerty</label>
 
+        </div>
+        </li>
+         <li class="nav-item" >
+                     <div  style="width: 875px;">
+
+            <nav class="nav" style="float:right;">
+                <h4 class="text" style="margin-top: 10px">Шапка документа:</h4>
+                <div class="form-check"
+                     style="margin-left: 10px; margin-top: 20px">
+                    <input class="form-check-input" type="radio"
+                           name="flexRadioDefault" checked
+                           id="flexRadioDefault12">
+                    <label class="form-check-label" for="flexRadioDefault12" style="color:#120a8f;">
+                        Нет
+                    </label>
+                </div>
+                <div class="form-check"
+                     style="margin-left: 50px; margin-top: 20px;">
+                    <input class="form-check-input" type="radio"
+                           name="flexRadioDefault" id="flexRadioDefault13">
+                    <label class="form-check-label" for="flexRadioDefault13" style="color:#120a8f;">
+                        Есть
+                    </label>
+                </div>
+            </nav>
+            <label hidden style="resize: none; width: 350px;float:left;margin-top: 20px;">qwerty</label>
+
+                     </div>
+        </li>
+     <li class="nav-item">
+         <div style="width:985px;">
+            <button disabled class="btn btn-primary" href="#" role="button" id="add_class" onclick="sendFile()"
+               style="width: 460px; margin-right: 10px; margin-top: 20px;float: right">Добавить
+                класс</button>
+             <label hidden style="resize: none; width: 350px;float:left;margin-top: 20px;">qwerty</label>
+
+             </div>
+        </li>
     <li class="nav-item">
-      <nav class="nav">
-        <div>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <div class="form-check" style="margin-left: 10px; margin-top: 10px">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault14">
-                <label class="form-check-label" for="flexRadioDefault1">
-                  Не создавать
-                </label>
-              </div>
-            </li>
-            <li class="nav-item">
-              <div class="form-check" style="margin-left: 10px; margin-top: 10px">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault15">
-                <label class="form-check-label" for="flexRadioDefault1">
-                  Создать
-                </label>
-              </div>
-          </ul>
+            <label></label>
+        </li>
+    <li class="nav-item">
+        <div style="width:860px;">
+            <h3  class="text" style="margin-top: 20px;float:right; width:350px;">Экспорт класса:</h3>
+             <label hidden style="resize: none; width: 350px;float:left;margin-top: 20px;">qwerty</label>
+
+
         </div>
-        <div style="margin-left: 140px">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <div class="form-check" style="margin-left: 10px; margin-top: 10px">
-                <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault16">
-                <label class="form-check-label" for="flexRadioDefault1">
-                  Текущее
-                </label>
-              </div>
-            </li>
-            <li class="nav-item">
-              <div class="form-check" style="margin-left: 10px; margin-top: 10px">
-                <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault1">
-                <label class="form-check-label" for="flexRadioDefault1">
-                  Новое (не введено)
-                </label>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </nav>
     </li>
+    <li class="nav-item">
+            <div style="width:1030px;float:right;">
+                <h4 class="text" style="margin-top: 20px;float:right;width:250px;">
+                    Название файла:</h4>
+                <h4 class="text" style="margin-top: 20px;float:right; width:270px;">Создать шапку
+                    класса:</h4>
+
+            </div>
+        </li>
+    <li class="nav-item">
+        <div style="width:960px;float:right;">
+                <nav class="nav" style="float:right; width: 460px">
+                <div>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <div class="form-check"
+                                 style="margin-left: 10px; margin-top: 10px">
+                                <input class="form-check-input" type="radio"
+                                       name="flexRadioDefault1" checked
+                                       id="flexRadioDefault14">
+                                <label class="form-check-label"
+                                       for="flexRadioDefault14" style="color:#120a8f;">
+                                    Не создавать
+                                </label>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="form-check"
+                                 style="margin-left: 10px; margin-top: 10px">
+                                <input class="form-check-input" type="radio"
+                                       name="flexRadioDefault1"
+                                       id="flexRadioDefault15">
+                                <label class="form-check-label"
+                                       for="flexRadioDefault15" style="color:#120a8f;">
+                                    Создать
+                                </label>
+                            </div>
+                    </ul>
+                </div>
+                <div style="margin-left: 140px">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <div class="form-check"
+                                 style="margin-left: 10px; margin-top: 10px">
+                                <input class="form-check-input" type="radio"
+                                       name="flexRadioDefault2" checked
+                                       id="flexRadioDefault16" onclick="remove_name()">
+                                <label class="form-check-label"
+                                       for="flexRadioDefault16" style="color:#120a8f;">
+                                    Текущее
+                                </label>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="form-check"
+                                 style="margin-left: 10px; margin-top: 10px">
+                                <input class="form-check-input" type="radio" onclick="get_name()"
+                                       name="flexRadioDefault2"
+                                       id="flexRadioDefault17">
+                                <label class="form-check-label"
+                                       id="rb_label" style="color:#120a8f;">
+                                    Новое (не введено)
+                                </label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+                         <label hidden style="resize: none; width: 350px;float:left;margin-top: 20px;">qwerty</label>
+
+            </div>
+        </li>
     <li>
-      <a class="btn btn-primary" href="#" role="button" style="width: 460px; margin-right: 10px; margin-top: 20px;">Экспортировать выбранный класс</a>
-    </li>
-    <li class="nav-item">
-      <label></label>
-    </li>
-    <li class="nav-item">
-      <h2 class="text">Удаление класса:</h2>
-    </li>
-    <li class="nav-item">
-      <nav class="nav">
-        <h4 class="text" style="margin-top: 5px">Пароль от аккаунта:</h4>
-        <textarea class="form-control text" id="exampleFormControlTextarea12" rows="1" style="resize: none; width: 200px; margin-left: 10px"></textarea>
-      </nav>
-    </li>
-    <li>
-      <a class="btn btn-primary" href="#" role="button" style="width: 460px; margin-right: 10px; margin-top: 20px;">Удалить выбранный класс</a>
-    </li>
-  </ul>
+        <div style="width:980px;">
+            <button class="btn btn-primary" role="button" href="#"
+               style="margin-top: 20px;float:right;width:470px;" id="exp_button" onclick="exporting()">Экспортировать
+                выбранный класс</button>
+             <label hidden style="resize: none; width: 350px;float:left;margin-top: 20px;">qwerty</label>
 
-    <table border="1" class="tablestyle1" style="margin-top: -600px">
-      <tr class="trstyle">
-        <th class="thstyle text cen">Выбрать</th>
-        <th class="thstyle text cen">Класс</th>
-      </tr>
-      {% for i in range(a) %}
-      <tr>
-        {% for j in classes[i] %}
-          {% if j == '-' %}
-            <td class="thstyle">
-              <input type="checkbox" style="margin-left: 45%">
-            </td>
-          {% else %}
-          <td class="cen" style="text-overflow: ellipsis; overflow: hidden">
-            {{ j }}
-          </td>
-          {% endif %}
-        {% endfor %}
-      </tr>
-      {% endfor %}
+             </div>
+        </li>
+    <li class="nav-item">
+            <label></label>
+        </li>
+    <li class="nav-item">
+        <div style="width:860px;">
+            <h3  class="text" style="margin-top: 20px;float:right; width:350px;">Удаление класса:</h3>
+             <label hidden style="resize: none; width: 350px;float:left;margin-top: 20px;">qwerty</label>
+
+        </div>
+    </li>
+
+            <li class="nav-item">
+             <div style="width:1210px;">
+            <nav class="nav" style="float:right; width: 700px">
+                <h4 class="text" style="margin-top: 5px" >Пароль от
+                    аккаунта:</h4>
+                <input class="form-control text"
+                       id="password" onkeyup="clearing()"
+                       style="resize: none; width: 200px; margin-left: 10px;color:#120a8f;"
+                       type="password"/>
+            </nav>
+                              <label hidden style="resize: none; width: 350px;float:left;margin-top: 20px;">qwerty</label>
+
+                 </div>
+        </li>
+        <li>
+            <div style="width:980px;">
+            <button disabled class="btn btn-primary" role="button" href="#"
+               style="margin-top: 20px;float:right;width:470px;" id="delbutton" onclick="deleting()">Удалить
+                выбранный класс</button>
+             <label hidden style="resize: none; width: 350px;float:left;margin-top: 20px;">qwerty</label>
+
+             </div>
+        </li>
+
+        <li>
+            <span
+               style="width: 460px; margin-right: 10px; margin-top: 20px;"></span>
+        </li>
+        <li>
+
+            <span id="message"
+               style="width: 460px; margin-right: 10px; margin-top: 20px;color:#FF0000">{{message}}</span>
+        </li>
+    </ul>
+    <table border="1" class="tablestyle1" style="margin-top: -600px"
+           id="table">
+        <tr class="trstyle">
+            <th class="thstyle text cen">Выбрать</th>
+            <th class="thstyle text cen">Класс</th>
+        </tr>
+        {% for i in range(a) %}
+        <tr>
+            {% for j in classes[i] %}
+
+                {% if i == 0 %}
+                    {% if j == '-' %}
+                        <td class="thstyle">
+                            <input type="radio"  style="margin-left: 45%"
+                                   name="table_radio" checked>
+                        </td>
+                    {% else %}
+                        <td align = "center" style="text-overflow: ellipsis; overflow: hidden;color: #120a8f;">
+                            {{ j }}
+                        </td>
+                    {% endif %}
+                {% else %}
+                {% if j == '-' %}
+                        <td class="thstyle">
+                            <input type="radio"  style="margin-left: 45%"
+                                   name="table_radio">
+                        </td>
+                    {% else %}
+                        <td align = "center" style="text-overflow: ellipsis; overflow: hidden;color: #120a8f;">
+                            {{ j }}
+                        </td>
+                {% endif %}
+            {% endif %}
+                {% endfor %}
+            </tr>
+            {% endfor %}
     </table>
-    </div>
+<script>
+    window.history.forward(1);
+
+    let work_name = document.querySelector('#getnick').textContent.slice(22).trim();
+
+    const request = new XMLHttpRequest();
+    request.open('POST', '/json_info' + '/' + work_name, false);
+    let data = new FormData();
+    request.send(data);
+    data = JSON.parse(request.responseText);
+    document.querySelector('#back').href = "/mainwindow/" + work_name;
+
+    if (data["classes_names"].length == 0) {
+        document.querySelector('#password').disabled = true;
+        document.querySelector('#exp_button').disabled = true;
+        document.querySelector('#delbutton').disabled = true;
+        document.querySelector('#flexRadioDefault14').disabled = true;
+        document.querySelector('#flexRadioDefault15').disabled = true;
+        document.querySelector('#flexRadioDefault16').disabled = true;
+        document.querySelector('#flexRadioDefault17').disabled = true;
+
+
+
+        let x = document.querySelector('#table')
+        /*if (x.style.display == "none"){
+              x.style.display = "block";
+              } else {
+             x.style.display = "none";
+             };*/
+    x.setAttribute("hidden", true);
+    let y = document.querySelector('#available_classes');
+    y.setAttribute("hidden", true);
+};
+function sendFile(file) {
+  if (document.querySelector('#class_name').value.length == 0){
+        document.querySelector('#message').textContent = "Введите название класса";
+        return;
+        }
+  if (document.querySelector('#class_name').value in data["classes_names"]) {
+  document.querySelector('#message').textContent = "Такой класс уже существует";
+        return;
+  };
+  var uri = '/add_account/' + work_name;
+  var xhr = new XMLHttpRequest();
+  var fd = new FormData();
+  let el = document.querySelector('#file');
+  xhr.open('POST', uri, true);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+
+      var imageName = xhr.responseText;
+      window.location.reload()
+      //do what you want with the image name returned
+      //e.g update the interface
+    }
+  };
+  if (el.files.length == 0) {
+  document.querySelector('#message').textContent = "Выберите файл";
+        return;
+}
+  fd.append('file', el.files[0]);
+  fd.append('name', document.querySelector('#class_name').value);
+  fd.append('cap', document.querySelector('#flexRadioDefault12').checked);
+  xhr.send(fd);
+};
+function clearing () {
+
+document.querySelector('#message').textContent = "";
+if (document.querySelector('#password').value == "") {
+    document.querySelector('#delbutton').disabled = true;
+}
+else {
+    document.querySelector('#delbutton').disabled = false;
+
+}
+
+if (document.querySelector('#class_name').value == "" || document.querySelector('#file').files.length == 0) {
+        document.querySelector('#add_class').disabled = true;
+
+}
+else {
+    document.querySelector('#add_class').disabled = false;
+
+}
+
+};
+
+function deleting () {
+if (document.querySelector('#password').value.length == 0){
+        document.querySelector('#message').textContent = "Введите пароль";
+        return;
+        };
+
+let k = 0;
+for (let i = 0; i < document.getElementsByName('table_radio').length; i++) {
+if (document.getElementsByName('table_radio')[i].checked) {
+k = i;
+};
+};
+let del_class = data["classes_names"][k];
+var uri = '/class_deleting/' + work_name + '/' + document.querySelector('#password').value + '/' + del_class;
+var xhr = new XMLHttpRequest();
+var fd = new FormData();
+xhr.open('POST', uri, true);
+
+xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      var imageName = xhr.responseText;
+      document.querySelector('#message').textContent = imageName;
+
+      if (imageName == "") {
+      window.location.reload();
+      } else {
+      document.querySelector('#password').value = "";
+      }
+
+      //do what you want with the image name returned
+      //e.g update the interface
+    }
+  };
+xhr.send(fd);
+
+};
+let k = 0;
+        for (let i = 0; i < document.getElementsByName('table_radio').length; i++) {
+        if (document.getElementsByName('table_radio')[i].checked) {
+        k = i;
+        };
+        };
+
+var name = data["classes_names"][k];
+function get_name () {
+    let a = document.getElementsByName('flexRadioDefault2');
+    let r = prompt('Введите название', "");
+    if (r != "") {
+        name = r.slice(0, 8);
+        document.querySelector('#rb_label').textContent = name;
+
+    } else {
+    a[1].checked = false;
+    a[0].checked = true;
+    }
+};
+function remove_name () {
+    let a = document.getElementsByName('flexRadioDefault2');
+    a[1].checked = false;
+    a[0].checked = true;
+    document.querySelector('#rb_label').textContent = "Новое (не введено)";
+    let k = 0;
+        for (let i = 0; i < document.getElementsByName('table_radio').length; i++) {
+        if (document.getElementsByName('table_radio')[i].checked) {
+        k = i;
+        };
+        };
+
+name = data["classes_names"][k];
+
+
+};
+
+
+function exporting () {
+    let k = 0;
+    for (let i = 0; i < document.getElementsByName('table_radio').length; i++) {
+        if (document.getElementsByName('table_radio')[i].checked) {
+            k = i;
+        };
+    };
+    let cl_name = data["classes_names"][k];
+
+    let a = document.getElementsByName('flexRadioDefault1');
+    let uri = "";
+    if (a[0].checked) {
+        uri = '/exporting/' + work_name + '/' + cl_name + '/' + name + '/' + "false";
+        }
+    else {
+        uri = '/exporting/' + work_name + '/' + cl_name + '/' + name + '/' + "true";
+    }
+    let xhr = new XMLHttpRequest();
+    let fd = new FormData();
+    xhr.open('POST', uri, true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            document.querySelector('#message').textContent = "Письмо с файлом отправлено на Вашу почту";
+            remove_name();
+        }
+
+    }
+    xhr.send(fd);
+
+};
+</script>
 {% endblock %}

@@ -2,43 +2,196 @@
 
 {% block content %}
 <nav class="navbar navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="http://127.0.0.1:8080/program"><-- Назад</a>
-  </div>
+    <div class="container-fluid">
+        <a class="text" id="back"
+        ><-- Назад</a>
+        <img src="/static/img/logo1.png" style="height: 70px; width: 100px; margin-left: 300px;" alt="здесь должна была быть картинка, но не нашлась">
+        <p class="text" id="getnick"
+           style="margin-left: 230px; width: 190px">Вы авторизовались как
+            {{nick}}</p>
+    </div>
 </nav>
 <ul class="nav flex-column">
-  <li class="nav-item">
-    <label></label>
-  </li>
-  <li class="nav-item">
-      <nav class="nav">
-        <h4 class="text" style="margin-top: 5px">Текущий никнейм:</h4>
-        <textarea class="form-control text" id="exampleFormControlTextarea1" rows="1" style="resize: none; width: 600px; margin-left: 70px;"></textarea>
-        <button class="btn btn-primary" role="button" style="width: 150px; margin-left: 77px;">Изменить</button>
-      </nav>
-  </li>
-  <li class="nav-item">
-    <label></label>
-  </li>
-  <li class="nav-item">
-    <nav class="nav">
-        <h4 class="text" style="margin-top: 10px">Текущий email:</h4>
-        <textarea class="form-control text" id="exampleFormControlTextarea2" rows="1" style="resize: none; width: 600px; margin-left: 110px"></textarea>
-        <button class="btn btn-primary" role="button" style="width: 150px; margin-left: 77px;">Изменить</button>
-      </nav>
-  </li>
-  <li class="nav-item">
-    <label></label>
-  </li>
-  <li class="nav-item">
-    <nav class="nav">
-        <h4 class="text" style="margin-top: 5px">Текущий пароль:</h4>
-        <button class="btn btn-primary" role="button" style="resize: none; width: 600px; margin-left: 90px">Узнать</button>
-        <button class="btn btn-primary" role="button" style="width: 150px; margin-left: 77px;">Изменить</button>
-      </nav>
-  </li>
-  <li>
-    <p class="text">Нажав "Узнать", на email придёт письмо, в котором будет указан пароль.</p>
-  </li>
+    <li class="nav-item">
+        <label></label>
+    </li>
+    <li class="nav-item">
+        <nav class="nav">
+            <h4 class="text" style="margin-top: 5px">Дата регистрации:</h4>
+            <input readonly class="form-control text" id="date"
+                   style="resize: none; width: 600px; margin-left: 70px"/>
+            <button disabled class="btn btn-primary" role="button"
+                    style="width: 150px; margin-left: 77px;">Понятно
+            </button>
+        </nav>
+    </li>
+    <li class="nav-item">
+        <label></label>
+    </li>
+    <li class="nav-item">
+        <nav class="nav">
+            <h4 class="text" style="margin-top: 5px">Текущий email:</h4>
+            <input readonly class="form-control text" id="email"
+                   style="resize: none; width: 600px; margin-left: 110px"/>
+            <button disabled class="btn btn-primary" role="button"
+                    style="width: 150px; margin-left: 77px;">Понятно
+            </button>
+        </nav>
+    </li>
+    <li class="nav-item">
+        <label></label>
+    </li>
+    <li class="nav-item">
+        <nav class="nav">
+            <h4 class="text" style="margin-top: 5px;width: 190px">Пароль:</h4>
+            <button class="btn btn-primary" onclick="change_password()"
+                    role="button" id="chgbtn"
+                    style="resize: none; width: 600px; margin-left: 90px;">
+                Изменить
+            </button>
+            <button disabled class="btn btn-primary" role="button"
+                    id="cancel_change" onclick="canceling()"
+                    style="width: 150px; margin-left: 77px;">Отмена
+            </button>
+
+        </nav>
+    </li>
+
+    <li class="nav-item">
+        <label></label>
+    </li>
+    <li class="nav-item" hidden id="hidden_1">
+        <nav class="nav">
+            <h4 class="text" style="margin-top: 5px;width: 210px;">Текущий
+                пароль:</h4>
+            <input type="password" onkeyup="mk_active()" class="form-control text" id="p_now"
+                   style="resize: none; width: 600px; margin-left: 70px"/>
+        </nav>
+    </li>
+    <li class="nav-item">
+        <label></label>
+    </li>
+    <li class="nav-item" hidden id="hidden_2">
+        <nav class="nav">
+            <h4 class="text" style="margin-top: 5px">Новый пароль:</h4>
+            <input type="password" onkeyup="mk_active()" class="form-control text" id="p_new1"
+                   style="resize: none; width: 600px; margin-left: 110px"/>
+        </nav>
+    </li>
+    <li class="nav-item">
+        <label></label>
+    </li>
+    <li class="nav-item" hidden id="hidden_3">
+        <nav class="nav">
+            <h4 class="text" style="margin-top: 5px;width:173px;">Повторите
+                пароль:</h4>
+            <input type="password" class="form-control text" id="p_new2" onkeyup="mk_active()"
+                   style="resize: none; width: 600px; margin-left: 110px"/>
+        </nav>
+    </li>
+    <li class="nav-item">
+
+
+        <span id="message"
+              style="width: 460px; margin-right: 10px; margin-top: 20px;color:#FF0000">{{message}}</span>
+    </li>
 </ul>
+<script>
+window.history.forward(1);
+
+    const request = new XMLHttpRequest();
+    request.open('GET', '/account_info' + '/' + document.querySelector('#getnick').textContent.slice(22).trim(), false);
+request.send();
+let data = JSON.parse(request.responseText);
+
+let work_name = document.querySelector('#getnick').textContent.slice(22).trim();
+document.querySelector('#back').href = "/mainwindow/" + work_name;
+document.querySelector('#email').value = data[1];
+document.querySelector('#date').value = data[0];
+
+document.querySelector('#cancel_change').textContent = "Обновлен " + data[2];
+function change_password () {
+     document.querySelector('#chgbtn').textContent = "Заполните все поля";
+    document.querySelector('#message').textContent = "";
+    document.querySelector('#hidden_1').removeAttribute("hidden");
+    document.querySelector('#hidden_2').removeAttribute("hidden");
+    document.querySelector('#hidden_3').removeAttribute("hidden");
+    document.querySelector('#cancel_change').removeAttribute("disabled");
+    document.querySelector('#cancel_change').textContent = "Отмена";
+    document.querySelector('#chgbtn').setAttribute("disabled", "true");
+
+
+
+
+    }
+function canceling () {
+    {
+    document.querySelector('#chgbtn').removeAttribute("disabled");
+    document.querySelector('#chgbtn').textContent = "Изменить";
+
+    document.querySelector('#hidden_1').setAttribute("hidden", "true");
+    document.querySelector('#hidden_2').setAttribute("hidden", "true");
+    document.querySelector('#hidden_3').setAttribute("hidden", "true");
+    document.querySelector('#cancel_change').textContent = "Обновлен " + data[2];
+
+    document.querySelector('#cancel_change').setAttribute("disabled", "true");
+    document.querySelector('#p_now').value = "";
+    document.querySelector('#p_new1').value = "";
+    document.querySelector('#p_new2').value = "";
+    document.querySelector('#message').textContent = "";
+    document.querySelector('#chgbtn').setAttribute("onclick", "change_password()");
+    }
+
+
+}
+function mk_active () {
+    document.querySelector('#message').textContent = "";
+    if (document.querySelector('#p_new1').value != "" && document.querySelector('#p_new2').value != "" && document.querySelector('#p_new2').value != document.querySelector('#p_new1').value) {
+                document.querySelector('#chgbtn').setAttribute("disabled", "true");
+                document.querySelector('#chgbtn').textContent = "Заполните все поля корректными данными";
+
+                document.querySelector('#message').textContent = "Новые пароли не совпадают";
+                return;
+            }
+    if (document.querySelector('#p_now').value == "" || document.querySelector('#p_new1').value == "" || document.querySelector('#p_new2').value == "") {
+        document.querySelector('#chgbtn').setAttribute("disabled", "true");
+        document.querySelector('#chgbtn').textContent = "Заполните все поля";
+
+            return;
+    } else {
+        document.querySelector('#chgbtn').removeAttribute("disabled");
+        document.querySelector('#chgbtn').textContent = "Изменить";
+        document.querySelector('#chgbtn').setAttribute("onclick", "make_answer()");
+
+
+    }
+
+}
+function make_answer () {
+
+    let uri = "/change_password"
+    let xhr = new XMLHttpRequest();
+    let fd = new FormData();
+    xhr.open('POST', uri, true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var result = xhr.responseText;
+            if (result != "ok"){
+                document.querySelector('#message').textContent = result;
+            }else {
+            alert('Пароль изменен');
+                        window.location.reload();
+
+            }
+        }
+
+    }
+    fd.append('email', work_name);
+    fd.append('old', document.querySelector('#p_now').value);
+    fd.append('new', document.querySelector('#p_new1').value);
+
+    xhr.send(fd);
+
+}
+</script>
 {% endblock %}

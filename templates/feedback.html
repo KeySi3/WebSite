@@ -2,16 +2,21 @@
 
 {% block content %}
 <nav class="navbar navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="http://127.0.0.1:8080/program"><-- Назад</a>
-  </div>
+    <div class="container-fluid">
+        <a  class="text" id="back" href="#"><-- Назад</a>
+        <img src="/static/img/logo1.png" style="height: 70px; width: 100px; margin-left: 300px;" alt="здесь должна была быть картинка, но не нашлась">
+        <p class="text" id="getnick"
+           style="margin-left: 230px; width: 190px">Вы авторизовались как
+            {{nick}}</p>
+    </div>
 </nav>
+
 
 <ul class="nav flex-column" style="margin-top: 20px">
   <li class="nav-item">
       <nav class="nav">
-          <h4 class="text">Тип обращения:</h4>
-          <select class="text" style="margin-left: 20px">
+          <h5 class="text">Тип обращения:</h5>
+          <select id="theme" class="text" style="margin-left: 20px">
               <option class="text">Идея для улучшения</option>
               <option class="text">Отзыв о программе</option>
               <option class="text">Сообщение об ошибке</option>
@@ -19,20 +24,88 @@
       </nav>
   </li>
   <li class="nav-item">
-      <h4 class="text" style="margin-top: 30px">Пожалуйста, опишите вашу идею:</h4>
+      <h5 class="text" style="margin-top: 30px">Пожалуйста, введите сообщение:</h5>
   </li>
   <li class="nav-item">
-      <textarea class="form-control text" id="exampleFormControlTextarea1" rows="15" style="resize: none; width: 1100px; margin-top: 30px"></textarea>
+      <textarea class="form-control text" id="text" onkeyup="clearing()" rows="15" style="resize: none; width: 1100px; margin-top: 30px;color:#120a8f;"></textarea>
   </li>
     <li class="nav-item" style="margin-top: 20px">
       <nav class="nav">
-          <button type="button" class="btn btn-primary" style="width: 800px; height: 40px">Отправить</button>
+          <button disabled type="button" id="sendbutton" onclick="sendmail()" class="btn btn-primary" style="width: 800px; height: 40px">Отправить</button>
           <form>
               <div class="form-group" style="margin-top: 5px; margin-left: 10px">
-                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                <input type="file" class="form-control-file" id="file" style="color: #1E90FF;">
               </div>
             </form>
       </nav>
   </li>
+    <li>
+        <label id="message" style="color:#FF0000;"></label>
+</li>
 </ul>
+<script>
+window.history.forward(1);
+
+let work_name = document.querySelector('#getnick').textContent.slice(22).trim();
+document.querySelector('#back').href = "/mainwindow/" + work_name;
+document.querySelector('#message').textContent = "";
+
+function clearing () {
+
+document.querySelector('#message').textContent = "";
+if (document.querySelector('#text').value == "") {
+    document.querySelector('#sendbutton').disabled = true;
+}
+else {
+    document.querySelector('#sendbutton').disabled = false;
+
+}
+
+}
+
+function sendmail () {
+    document.querySelector('#sendbutton').textContent = "Пожалуйста, подождите";
+    document.querySelector('#sendbutton').setAttribute("disabled", true);
+    let m = document.querySelector('#theme');
+    let theme = m.options[m.selectedIndex].text;
+    let text = document.querySelector('#text').value;
+    document.querySelector('#text').setAttribute("readonly", "true");
+    document.querySelector('#theme').setAttribute("disabled", "true");
+    document.querySelector('#file').setAttribute("disabled", "true");
+
+    let getters = "(nicolaynemov@mail.ru)";
+    let file = document.querySelector('#file').files;
+    var uri = "/sendmail/" + work_name;
+    var xhr = new XMLHttpRequest();
+    var fd = new FormData();
+    xhr.open('POST', uri, true);
+    xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+          document.querySelector('#sendbutton').textContent = "Отправить";
+           document.querySelector('#sendbutton').setAttribute("disabled", "true");
+
+          document.querySelector('#sendbutton').removeAttribute("disabled");
+          document.querySelector('#file').removeAttribute("disabled");
+
+          document.querySelector('#text').removeAttribute("readonly");
+          document.querySelector('#theme').removeAttribute("disabled");
+          document.getElementById("file").value = "";
+          document.querySelector('#theme').value = "Идея для улучшения";
+          document.querySelector('#text').value = "";
+
+          document.querySelector('#message').textContent = "Спасибо за обратную связь!";
+
+
+        }
+    }
+    if (document.querySelector('#file').files.length != 0){
+        fd.append('file', file[0]);
+    }
+    fd.append('text', text);
+    fd.append('theme', theme);
+    fd.append('getters', getters);
+
+    xhr.send(fd);
+  }
+</script>
 {% endblock %}

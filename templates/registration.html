@@ -1,12 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+        <a  class="text" id="back" href="/"><-- Назад</a>
+        <img src="/static/img/logo1.png" style="height: 70px; width: 100px; margin-left: 300px;" alt="здесь должна была быть картинка, но не нашлась">
+        <p class="text" id="getnick"
+           style="margin-left: 510px; width: 190px"></p>
+    </div>
+</nav>
 <h1 class="cen">Регистрация</h1>
 <form action="" method="post">
     {{ form.hidden_tag() }}
     <p>
-        {{ form.email.label }}<br>
-        {{ form.email(class="form-control", type="email") }}<br>
+        {{ form.email.label (style="color: #120a8f;")}}<br>
+        {{ form.email(class="form-control", type="email", onkeyup="checkParams()", style="color: #120a8f;") }}<br>
         {% for error in form.email.errors %}
             <p class="alert alert-danger" role="alert">
                 {{ error }}
@@ -14,17 +22,17 @@
         {% endfor %}
     </p>
     <p>
-        {{ form.name.label }}<br>
-        {{ form.name(class="form-control") }}<br>
-        {% for error in form.name.errors %}
+        {{ form.password.label(style="color: #120a8f;")}}<br>
+        {{ form.password(class="form-control",onkeyup="checkParams()", type="password", style="color: #120a8f;") }}<br>
+        {% for error in form.email.errors %}
             <p class="alert alert-danger" role="alert">
                 {{ error }}
             </p>
         {% endfor %}
     </p>
     <p>
-        {{ form.password.label }}<br>
-        {{ form.password(class="form-control", type="password") }}<br>
+        {{ form.password_again.label(style="color: #120a8f;") }}<br>
+        {{ form.password_again(class="form-control", type="password",onkeyup="checkParams()", style="color: #120a8f;") }}<br>
         {% for error in form.password.errors %}
             <p class="alert alert-danger" role="alert">
                 {{ error }}
@@ -34,8 +42,8 @@
     <ul class="nav">
       <li class="nav-item">
         <p>
-            {{ form.code.label }}<br>
-            {{ form.code(class="form-control", type="password") }}<br>
+            {{ form.code.label(style="color: #120a8f;")}}<br>
+            {{ form.code(class="form-control", onkeyup="checkParams()", disabled=true,style="color: #120a8f;") }}<br>
             {% for error in form.code.errors %}
                 <p class="alert alert-danger" role="alert">
                     {{ error }}
@@ -44,19 +52,18 @@
         </p>
       </li>
       <li class="nav-item">
-        <button type="button" class="btn btn-primary" style="margin-top: 33px; margin-left: 20px">Отправить код</button>
+        <button type="button" class="btn btn-primary" id="passwordf3" onclick="sendcodejs()" style="margin-top: 33px; margin-left: 20px" disabled>Отправить код</button>
       </li>
     </ul>
     <div class="btn-group" role="group" aria-label="Basic example">
-  <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
-    {{message}}
+  <p>{{ form.submit(type="submit", class="btn btn-primary", disabled=true) }}</p>
     <p>
-  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="margin-left: 20px">
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="margin-left: 20px;">
     Помощь
   </button>
     </p>
     <div class="collapse" id="collapseExample">
-      <div class="card card-body">
+      <div class="card card-body" style="color: #120a8f;">
         Для регистрации в программе "Помощник учителя" Вам нужно указать свой email, никнейм и пароль. <br>
           Требования для email: <br>
           Email должен быть корректен и не использован ранее в системе. <br>
@@ -67,5 +74,73 @@
       </div>
     </div>
     </div>
+    <p id="message" style="color:#FF0000">{{message}}</p>
+    <script>
+    window.history.forward(1);
+
+    function sendcodejs() {
+                  let p1 = document.querySelector('#passwordf').value;
+                  let p2 = document.querySelector('#passwordf2').value;
+                  const em = document.querySelector('#emailf').value;
+                  const pa = document.querySelector('#passwordf').value;
+                  const request = new XMLHttpRequest();
+
+                  request.open('POST', '/code' + '/' + em + '/' + pa);
+                  request.onload = () => {
+
+              // Извлечение данных JSON из запроса
+              const data = JSON.parse(request.responseText);
+
+
+
+
+          }
+                  const data = new FormData();
+                  request.send(data);
+                  return false;
+
+};
+
+function checkParams() {
+    let email = document.querySelector('#emailf').value;
+    let p1 = document.querySelector('#passwordf').value;
+    let p2 = document.querySelector('#passwordf2').value;
+    let p3 = document.querySelector('#code_sub').value;
+    let b1 = document.querySelector('#passwordf3');
+    let b2 = document.querySelector('#okbtn');
+    if(email.length != 0 && p1.length != 0 && p2.length != 0 && p1 == p2) {
+        b1.disabled = false;
+        document.querySelector('#code_sub').disabled = false;
+
+    } else {
+        b1.disabled = true;
+        document.querySelector('#code_sub').textContent = "";
+        document.querySelector('#code_sub').disabled = true;
+            }
+    if (p3.length != 0){
+        b1.disabled = true;
+
+
+
+    }
+    if(email.length != 0 && p1.length != 0 && p2.length != 0 && p3.length != 0) {
+        b2.disabled = false;
+
+
+    } else {
+        b2.disabled = true;
+            }
+    if(p1 != p2 && p1 != "" && p2 != "") {
+                    document.querySelector('#code_sub').value = "";
+                    document.querySelector('#message').textContent = "Пароли не совпадают";
+                    return false;
+                    }
+                  else {
+                  document.querySelector('#message').textContent = "";
+                  }
+
+}
+
+</script>
 </form>
 {% endblock %}

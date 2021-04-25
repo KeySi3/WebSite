@@ -1,38 +1,66 @@
+
+
 {% extends "base.html" %}
 
 {% block content %}
+
 <header>
+
 <ul class="nav justify-content-end">
+    <li class="nav-item">
+        <img src="/static/img/logo1.png" style="height: 70px; width: 100px; margin-left: -750px;" alt="здесь должна была быть картинка, но не нашлась">
+    </li>
+    <li class="nav-item">
+
+    </li>
   <li class="nav-item">
-    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Ещё нет аккаунта?</a>
+    <a class="nav-link disabled" style="color: #6600ff;" href="#" tabindex="-1" aria-disabled="true">Ещё нет аккаунта?</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link link-primary" href="http://127.0.0.1:8080/registration">Зарегистрироваться</a>
+    <a class="nav-link link-primary" href="/registration">Зарегистрироваться</a>
+
 </ul>
 </header>
 <h1 class="cen">Добро пожаловать!</h1>
-<form action="" method="post" novalidate>
+<form action="" method="post">
     {{ form.hidden_tag() }}
     <p>
-        {{ form.username.label }}<br>
-        {{ form.username(class="form-control") }}<br>
-        {% for error in form.username.errors %}
+        {{ form.email.label(style="color: #120a8f;") }}<br>
+        {{ form.email(class="form-control", onkeyup="checkParams()", style="color: #120a8f;") }}<br>
+        {% for error in form.email.errors %}
             <p class="alert alert-danger" role="alert">
                 {{ error }}
             </p>
         {% endfor %}
     </p>
     <p>
-        {{ form.password.label }}<br>
-        {{ form.password(class="form-control", type="password") }}<br>
+        {{ form.password.label(style="color: #120a8f;")}}<br>
+        {{ form.password(class="form-control", type="password", onkeyup="checkParams()", style="color: #120a8f;") }}<br>
         {% for error in form.password.errors %}
             <p class="alert alert-danger" role="alert">
                 {{ error }}
             </p>
         {% endfor %}
     </p>
-    <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+    <p>{{ form.remember_me() }} {{ form.remember_me.label(style="color: #120a8f;") }}</p>
+    <p>{{ form.submit(type="submit", class="btn btn-primary", disabled=true) }}</p>
+    <script type="text/javascript">
+    window.history.forward(1);
+    function checkParams() {
+    let email = document.querySelector('#name').value;
+    let p = document.querySelector('#password').value;
+    let b = document.querySelector('#enter');
+    if(email.length != 0 && p.length != 0) {
+        b.disabled = false;
+    } else {
+        b.disabled = true;
+            }
+          document.querySelector('#message').textContent = "";
+
+};
+
+</script>
+    <p style="color:#FF0000;" id="message">{{message}}</p>
 </form>
 {% endblock %}
 

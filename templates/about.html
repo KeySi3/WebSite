@@ -2,9 +2,13 @@
 
 {% block content %}
 <nav class="navbar navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="http://127.0.0.1:8080/program"><-- Назад</a>
-  </div>
+    <div class="container-fluid">
+        <a  class="text" id="back" href="#"><-- Назад</a>
+        <img src="/static/img/logo1.png" style="height: 70px; width: 100px; margin-left: 300px;" alt="здесь должна была быть картинка, но не нашлась">
+        <p class="text" id="getnick"
+           style="margin-left: 230px; width: 190px">Вы авторизовались как
+            {{nick}}</p>
+    </div>
 </nav>
 <h1 class="cen text">Оглавление</h1>
 <ul>
@@ -13,6 +17,7 @@
     <li><a href="#mash">Кнопка МЭШ</a></li>
     <li><a href="#exit">Кнопка выхода из аккаунта</a></li>
     <li><a href="#exit">Калькулятор</a></li>
+    <li><a href="#exit">Mini Paint</a></li>
     <li><a href="#remind">Напоминания</a></li>
     <li><a href="#links">Ссылки</a></li>
     <li><a href="#notes">Заметки</a></li>
@@ -45,6 +50,9 @@
 <h2 class="text" id="#calculator">Калькулятор</h2>
 <p class="text txt" style="width: 800px">Открывает калькулятор, встроенный в операционной системе компьютера. Если открыть
 калькулятор не получится, появится сообщение, уведомляющее вас об этом.</p>
+<p><a name="paint"></a></p>
+<h2 class="text" id="#paint">Mini Paint</h2>
+<p class="text txt" style="width: 800px">Открывает виртуальную графическую доску.</p>
 <p><a name="remind"></a></p>
 <h2 class="text" id="#remind">Напоминания</h2>
 <p class="text txt" style="width: 800px">Открывает окно "Напоминания". В этом окне можно создать и удалить напоминание.
@@ -95,6 +103,12 @@
     <li class="text">Изменение внешнего вида приложения</li>
 </ul></p>
 <label></label>
+<script>
+window.history.forward(1);
+
+let work_name = document.querySelector('#getnick').textContent.slice(22).trim();
+document.querySelector('#back').href = "/mainwindow/" + work_name;
+</script>
 {% endblock %}
 
 

@@ -2,145 +2,441 @@
 
 {% block content %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <ul class="nav flex-column">
-  <li class="nav-item">
-    <div class="container-fluid">
-    <a class="navbar-brand">Помощник учителя</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    </div>
-  </li>
-  <li class="nav-item">
-    <ul class="nav">
-      <li class="nav-item">
-    <a class="btn btn-primary" style="margin-left: 10px" href="http://127.0.0.1:8080/classes" role="button">Классы</a>
-  </li>
-  <li class="nav-item">
-    <div class="btn-group">
-  <button style="margin-left: 10px" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Настройки
-  </button>
-  <div class="dropdown-menu">
-    <a class="dropdown-item" href="http://127.0.0.1:8080/account">Аккаунт</a>
-  </div>
-</div>
-  </div>
-  </li>
-  <li class="nav-item">
-    <button style="margin-left: 10px" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    О программе
-  </button>
-  <div class="dropdown-menu" style="margin-left: 30px">
-    <a class="dropdown-item" href="http://127.0.0.1:8080/about">Помощь в работе</a>
-    <a class="dropdown-item" href="http://127.0.0.1:8080/feedback">Обратная связь</a>
-    <label>______________________________________________________________________________________________________________________________________________________________</label>
-    <a class="dropdown-item" aria-disabled="true">Данная программа была разработана учениками Яндекс.Лицея для помощи учителям в их важном и ответственном деле. <br>
-    Она находится в свободном доступе и каждый имеет право на её использование в своих целях</a>
-  </div>
-  </li>
-      <li class="nav-item">
-        <button type="button" class="btn btn-primary" style="margin-left: 510px; width: 190px">Скачать программу</button>
-      </li>
-</ul>
-  </li>
-</ul>
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <div class="container-fluid">
+                <a class="navbar-brand">Помощник учителя</a>
+
+
+                <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </li>
+        <li class="nav-item">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="btn btn-primary" style="margin-left: 10px" href="#" id="mainwork" role="button">Классы</a>
+                </li>
+                <li class="nav-item">
+                    <div class="btn-group">
+                        <button style="margin-left: 10px" type="button"
+                                class="btn btn-primary dropdown-toggle"
+                                data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                            Настройки
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" id="aclink"
+                               href="/account" style="color: #120a8f;">Аккаунт</a>
+                        </div>
+                    </div>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <button style="margin-left: 10px" type="button"
+                            class="btn btn-primary dropdown-toggle"
+                            data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        О программе
+                    </button>
+                    <div class="dropdown-menu" style="margin-left: 30px">
+                        <a id="about_slk" class ="dropdown-item"
+                           href="/about" style="color: #120a8f;">Помощь в
+                            работе</a>
+                        <a class="dropdown-item"
+                           href="/feedback" id="fb" style="color: #120a8f;">Обратная
+                            связь</a>
+                        <label>______________________________________________________________________________________________________________________________________________________________</label>
+                        <i class="dropdown-item" aria-disabled="true" style="color:#120a8f;">Данная
+                            программа была разработана учениками Яндекс.Лицея
+                            для помощи учителям в их важном и ответственном
+                            деле. <br>
+                            Она находится в свободном доступе и каждый имеет
+                            право на её использование в благих целях.</i>
+                    </div>
+                </li>
+
+            </ul>
+            <img src="/static/img/logo1.png" style="height: 70px; width: 100px; margin-left: 560px; margin-top: -90px" alt="здесь должна была быть картинка, но не нашлась">
+        </li>
+
+    </ul>
+    <p class="text"  id="getnick"
+                      style="margin-left: 230px; width: 190px">Вы авторизовались как {{nick}}</p>
 </nav>
 <label></label>
 
 <div class="menu">
-  <a class="btn btn-primary" href="https://dnevnik.mos.ru/" role="button" style="width: 200px; margin-right: 10px; margin-top:20px">Открыть МЭШ</a> <br>
-  <a class="btn btn-primary" href="http://127.0.0.1:8080/login" role="button" style="width: 200px; margin-right: 10px; margin-top: 20px;">Выйти из аккаунта</a>
-  <h6 class="text" style="width: 200px; margin-right: 10px; margin-top: 60px;">Полезные инструменты:</h6>
-  <button class="btn btn-primary" role="button" style="width: 200px; margin-right: 10px; margin-top: 20px;">Калькулятор</button> <br>
-  <h6 class="text" style="width: 200px; margin-right: 10px; margin-top: 60px;">Работа с записями:</h6>
-  <a class="btn btn-primary" href="http://127.0.0.1:8080/remind" role="button" style="width: 200px; margin-right: 10px; margin-top: 20px;">Напоминания</a> <br>
-  <a class="btn btn-primary" href="http://127.0.0.1:8080/links" role="button" style="width: 200px; margin-right: 10px; margin-top: 20px;">Ссылки</a> <br>
-  <a class="btn btn-primary" href="http://127.0.0.1:8080/notes" role="button" style="width: 200px; margin-right: 10px; margin-top: 20px;">Заметки</a>
+    <a class="btn btn-primary" href="https://dnevnik.mos.ru/" target="_blank" role="button"
+       style="width: 200px; margin-right: 10px; margin-top:20px">Открыть
+        МЭШ</a> <br>
+    <a class="btn btn-primary" href="/logout" role="button"
+       style="width: 200px; margin-right: 10px; margin-top: 20px;">Выйти из
+        аккаунта</a>
+    <h6 class="text"
+        style="width: 200px; margin-right: 10px; margin-top: 60px;">Полезные
+        инструменты:</h6>
+    <a class="btn btn-primary" role="button"
+            style="width: 200px; margin-right: 10px; margin-top: 20px;" target="_blank" href="https://yandex.ru/search/?text=%D0%BA%D0%B0%D0%BB%D1%8C%D0%BA%D1%83%D0%BB%D1%8F%D1%82%D0%BE%D1%80&lr=213">
+        Калькулятор
+    </a>
+    <br>
+    <h6 class="text"
+        style="width: 200px; margin-right: 10px; margin-top: 60px;">Работа с
+        записями:</h6>
+    <a class="btn btn-primary" href="/remind" id="remindbtn"
+       role="button"
+       style="width: 200px; margin-right: 10px; margin-top: 20px;">Напоминания</a>
+    <br>
+    <a id="linkbut" class="btn btn-primary" href="/links" role="button"
+       style="width: 200px; margin-right: 10px; margin-top: 20px;">Ссылки</a>
+    <br>
+    <a class="btn btn-primary" href="/notes" id = "zametki" role="button"
+       style="width: 200px; margin-right: 10px; margin-top: 20px;">Заметки</a>
 </div>
 
 <ul class="nav flex-column">
-  <li class="nav-item">
+    <li class="nav-item">
         <ul class="nav">
-      <li class="nav-item">
-        <h4 class="text">Класс:</h4>
-      </li>
-      <li class="nav-item" style="margin-left: 10px; margin-top: 5px">
-        <select class="text">
-          {% for i in classes %}
-          <option class="text">{{ i }}</option>
-          {% endfor %}
-        </select>
-      </li>
-    </ul>
-  </li>
-  <li class="nav-item">
-    <ul class="nav">
-      <li class="nav-item">
-        <h6 class="text" style="margin-top: 10px">Сортировать по:</h6>
-      </li>
-      <li class="nav-item" style="margin-left: 10px; margin-top: 5px">
-        <select class="text">
-          <option class="text">Фамилии</option>
-          <option class="text">Имени</option>
-          <option class="text">Дате рождения</option>
-          <option class="text">Полу (мальчики)</option>
-          <option class="text">Полу (девочки)</option>
-        </select>
-      </li>
-      <li class="nav-item">
-        <h4 class="text" style="margin-left: 100px; margin-top: 5px">Поиск ученика:</h4>
-      </li>
-      <li class="nav-item" style="margin-left: 10px; margin-top: 5px">
-        <textarea class="form-control text" id="exampleFormControlTextarea1" rows="1" style="resize: none"></textarea>
-      </li>
-    </ul>
-  </li>
-  <li class="nav-item">
-      <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked1">
-    <label class="form-check-label text" for="flexCheckChecked">
-      Показывать в обратном порядке
-    </label>
-      </div>
-  </li>
-  <li class="nav-item">
-    <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-    <label class="form-check-label text" for="flexCheckChecked">
-      Выбрать всех
-    </label>
-      </div>
-  </li>
+            <li class="nav-item">
+                <h4 class="text">Класс:</h4>
+            </li>
+            <li class="nav-item" style="margin-left: 10px; margin-top: 5px" onchange="on_change()">
+                <select class="text" id="classnow">
+                    {% for i in classes %}
+                    <option class="text">{{ i }}</option>
+                    {% endfor %}
+                </select>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item">
+        <ul class="nav">
+            <li class="nav-item">
+                <h6 class="text" style="margin-top: 10px">Сортировать по:</h6>
+            </li>
+            <li class="nav-item" style="margin-left: 10px; margin-top: 5px">
+                <select class="text" id="showway" onchange="on_change()">
+                    <option class="text">Фамилии</option>
+                    <option class="text">Имени</option>
+                    <option class="text">Дате рождения</option>
+                    <option class="text">Полу (мальчики)</option>
+                    <option class="text">Полу (девочки)</option>
+                </select>
+            </li>
+            <li class="nav-item">
+                <h4 class="text" style="margin-left: 100px; margin-top: 5px">
+                    Поиск ученика:</h4>
+            </li>
+            <li class="nav-item" style="margin-left: 10px; margin-top: 5px">
+                <input onkeyup="looking()" class="form-control text"
+                       id="lookedit"
+                       style="resize: none;color: #120a8f;"/>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value=""
+                   id="flexCheckChecked1" onclick="on_change()">
+            <label class="form-check-label text" for="flexCheckChecked">
+                Показывать в обратном порядке
+            </label>
+        </div>
+    </li>
+    <li class="nav-item">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value=""
+                   id="flexCheckChecked" onchange="all_on()">
+            <label class="form-check-label text" for="flexCheckChecked">
+                Выбрать всех
+            </label>
+        </div>
+    </li>
 </ul>
 <label></label>
-<table border="1" class="tablestyle">
-  <tr class="trstyle">
-    <th class="thstyle text cen">Выбрать</th>
-    <th class="thstyle text cen">Имя</th>
-    <th class="thstyle text cen">Фамилия</th>
-    <th class="thstyle text cen">Дата рождения</th>
-    <th class="thstyle text cen">Пол</th>
-    <th class="thstyle text cen">Email</th>
-    <th class="thstyle text cen">Телефон</th>
-    <th class="thstyle text cen">Родители</th>
-  </tr>
-  {% for i in range(a) %}
-  <tr>
-    {% for j in students[i] %}
-      {% if j == '-' %}
+<table border="1" class="tablestyle" id="table">
+    <tr class="trstyle">
+        <th  class="thstyle text cen">Выбрать</th>
+        <th class="thstyle text cen">Имя</th>
+        <th class="thstyle text cen">Фамилия</th>
+        <th class="thstyle text cen">Дата рождения</th>
+        <th class="thstyle text cen">Пол</th>
+        <th class="thstyle text cen">Email</th>
+        <th class="thstyle text cen">Телефон</th>
+        <th class="thstyle text cen">Родители</th>
+    </tr>
+    {% for i in range(a) %}
+    <tr>
+        {% for j in students[i] %}
+        {% if j == '-' %}
         <td class="thstyle">
-          <input type="checkbox" style="margin-left: 45%">
+            <input type="checkbox" onclick="mk_great()" name="check" style="margin-left: 45%">
         </td>
-      {% else %}
-      <td style="text-overflow: ellipsis; overflow: hidden" class="cen">
-        {{ j }}
-      </td>
-      {% endif %}
+        {% else %}
+        <td align = "center" style="text-overflow: ellipsis; overflow: hidden;color: #120a8f;">
+            {{ j }}
+        </td>
+        {% endif %}
+        {% endfor %}
+    </tr>
     {% endfor %}
-  </tr>
-  {% endfor %}
 </table>
-<a class="btn btn-primary" href="http://127.0.0.1:8080/send" role="button" style="width: 880px; margin-right: 10px; margin-top: 20px;">Продолжить</a> <br>
+<button disabled class="btn btn-primary" id="continue"  role="button"
+   style="width: 880px; margin-right: 10px; margin-top: 20px;" href="#" onclick="cont_on()">Не выбрано ни одного ученика</button>
+<br>
 <label></label>
+<script type="text/javascript">
+window.history.forward(1);
+
+const request = new XMLHttpRequest();
+request.open('POST', '/json_info' + '/' + document.querySelector('#getnick').textContent.slice(22).trim(), false);
+let data = new FormData();
+request.send(data);
+data = JSON.parse(request.responseText);
+
+let work_name = document.querySelector('#getnick').textContent.slice(22).trim();
+document.querySelector('#continue').href = "/classes/" + work_name;
+document.querySelector('#mainwork').href = "/classes/" + work_name;
+document.querySelector('#about_slk').href = "/about/" + work_name;
+document.querySelector('#fb').href = "/feedback/" + work_name;
+document.querySelector('#linkbut').href = "/links/" + work_name;
+document.querySelector('#zametki').href = "/notes/" + work_name;
+
+document.querySelector('#aclink').href = "/account/" + work_name;
+document.querySelector('#remindbtn').href = "/remind/" + work_name;
+
+
+
+if (data["classes_names"].length == 0) {
+
+document.querySelector('#continue').textContent = "Добавить класс";
+document.querySelector('#table').setAttribute("hidden", "true");
+
+document.querySelector('#continue').href = "/classes/" + work_name;
+document.querySelector('#continue').removeAttribute("disabled");
+document.querySelector('#showway').disabled = true;
+document.querySelector('#classnow').disabled = true;
+document.querySelector('#flexCheckChecked1').disabled = true;
+document.querySelector('#flexCheckChecked').disabled = true;
+
+document.querySelector('#exampleFormControlTextarea1').disabled = true;
+
+};
+
+function on_change() {
+    let table = document.querySelector('#table');
+
+    for (let i = 0; i < 100; i++) {
+        table.rows[i + 1].style.display = 'none';
+    }
+
+    let m = document.querySelector('#classnow');
+    key = m.options[m.selectedIndex].text;
+    let n = document.querySelector('#showway')
+    key2 = n.options[n.selectedIndex].text;
+    if (document.querySelector('#flexCheckChecked1').checked) {
+        key2 = key2 + 'R';
+    };
+
+    let ld0 = data[key][key2];
+    for (let i = 1; i <= ld0.length; i++) {
+        for (let j = 1; j <= 7; j ++) {
+            table.rows[i].style.display = 'table-row';
+            table.rows[i].cells[j].innerHTML = ld0[i- 1][j - 1];
+        }
+    }
+
+};
+function all_on () {
+
+let flag = true;
+let cb = document.getElementsByName('check');
+if (document.querySelector('#flexCheckChecked').checked == false) {
+
+    for (let i = 0; i < cb.length; i++) {
+        if (cb[i].checked == false) {
+
+            flag = false;
+            };
+    };
+
+    document.querySelector('#flexCheckChecked').checked = flag;
+
+    return;
+
+};
+let table = document.querySelector('#table');
+let m = document.querySelector('#classnow');
+key = m.options[m.selectedIndex].text;
+for (let i = 1; i <= cb.length; i++) {
+cb[i - 1].checked = true;
+};
+document.querySelector('#continue').removeAttribute("disabled");
+document.querySelector('#continue').textContent = "Продолжить";
+document.querySelector('#flexCheckChecked').checked = true;
+document.querySelector('#continue').href = "/send/" + work_name;
+
+
+};
+function mk_great () {
+
+let cb = document.getElementsByName('check');
+let count = 0;
+    for (let i = 0; i < cb.length; i++) {
+        if (cb[i].checked == true) {
+            count = count + 1;
+            };
+    };
+    if (count == 0) {
+        document.querySelector('#continue').textContent = "Не выбрано ни одного ученика";
+        document.querySelector('#continue').setAttribute("disabled", true);
+    } else {
+        document.querySelector('#continue').removeAttribute("disabled");
+        document.querySelector('#continue').textContent = "Продолжить";
+        document.querySelector('#continue').href = "/send/" + work_name;
+
+
+
+    }
+
+    document.querySelector('#flexCheckChecked').checked = count == cb.length;
+    return;
+};
+function cont_on () {
+    if (data["classes_names"].length == 0) {
+         window.open(document.querySelector('#continue').href, "_self");
+         return
+
+        }
+    let m = document.querySelector('#classnow');
+    let key = m.options[m.selectedIndex].text;
+    let n = document.querySelector('#showway')
+    let key2 = n.options[n.selectedIndex].text;
+    if (document.querySelector('#flexCheckChecked1').checked) {
+        key2 = key2 + 'R';
+    };
+    let table = document.querySelector('#table');
+    let cb = document.getElementsByName('check');
+
+    let mas = []
+    let count = 0;
+    for (let i = 0; i < looking(); i++) {
+        if (cb[i].checked == true) {
+            mas.push(i);
+            };
+    };
+    let dates = [];
+    alert(mas);
+    for (let i = 0; i < mas.length; i++) {
+
+        dates.push(data[key][key2][mas[i]][0] + "+-+" + data[key][key2][mas[i]][1] + "+-+" + data[key][key2][mas[i]][4]);
+    }
+
+    let pr = "";
+    for (let i = 0; i < dates.length; i++) {
+        pr = pr + dates[i] + "---";
+    }
+    document.querySelector('#continue').href = document.querySelector('#continue').href + "/" + pr;
+    window.open(document.querySelector('#continue').href, "_self");
+    return;
+
+
+
+    //window.open(document.querySelector('#continue').href, "_self")
+
+};
+
+function looking () {
+    let x = document.querySelector('#lookedit').value.toLowerCase();
+    let m = document.querySelector('#classnow');
+    key = m.options[m.selectedIndex].text;
+
+    let n = document.querySelector('#showway')
+    key2 = n.options[n.selectedIndex].text;
+
+    let ld0 = data[key];
+    let ld = ld0[Object.keys(ld0)[0]];
+    let ok_mas = [];
+    let table = document.querySelector('#table');
+
+    for (let i = 0; i < ld.length; i++) {
+           for (let j = 1; j <= 7; j ++){
+                table.rows[i + 1].style.display = 'none';
+            };
+
+            if (ld[i].includes(x)) {
+                ok_mas.push(i)
+            };
+    };
+    let norm_mas = [];
+    for (let i = 0; i < ok_mas.length; i++) {
+        norm_mas.push(ok_mas[i]);
+        };
+    let final_mas = [];
+     for (let i = 0; i < norm_mas.length; i++) {
+        final_mas.push(data[key][key2][norm_mas[i]]);
+        };
+  document.querySelector('#continue').textContent = "Нет учеников, удовлетворяющих поиску";
+  document.querySelector('#continue').setAttribute("disabled", final_mas.length > 0);
+  document.querySelector('#showway').disabled = true;
+    document.querySelector('#classnow').disabled = true;
+    document.querySelector('#flexCheckChecked1').disabled = true;
+    document.querySelector('#flexCheckChecked').disabled = true;
+  table.rows[0].style.display = 'none';
+  for (let i = 1; i <= final_mas.length; i++) {
+    table.rows[0].style.display = 'table-row';
+    table.rows[i].style.display = 'table-row';
+
+    document.querySelector('#showway').disabled = false;
+    document.querySelector('#classnow').disabled = false;
+    document.querySelector('#flexCheckChecked1').disabled = false;
+    document.querySelector('#flexCheckChecked').disabled = false;
+
+    document.querySelector('#continue').textContent = "Не выбрано ни одного ученика"
+    document.querySelector('#continue').href = "/send/" + work_name;
+
+
+    for (let j = 1; j <= 7; j ++) {
+    table.rows[i].style.display = 'table-row';
+
+    table.rows[i].cells[j].innerHTML = final_mas[i- 1][j - 1];
+    }
+   //mk_great()
+
+};
+return final_mas.length;
+
+};
+let table = document.querySelector('#table');
+
+for (let i = 0; i < 100; i++) {
+    table.rows[i + 1].style.display = 'none';
+}
+
+let m = document.querySelector('#classnow');
+let key = m.options[m.selectedIndex].text;
+let n = document.querySelector('#showway')
+let key2 = n.options[n.selectedIndex].text;
+
+if (document.querySelector('#flexCheckChecked1').checked) {
+        key2 = key2 + 'R';
+    };
+
+let ld0 = data[key][key2];
+for (let i = 1; i <= ld0.length; i++) {
+    for (let j = 1; j <= 7; j ++) {
+        table.rows[i].style.display = 'table-row';
+
+        table.rows[i].cells[j].innerHTML = ld0[i- 1][j - 1];
+        }
+    }
+
+
+</script>
 {% endblock %}

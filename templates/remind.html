@@ -2,86 +2,401 @@
 
 {% block content %}
 <nav class="navbar navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="http://127.0.0.1:8080/program"><-- Назад</a>
-  </div>
+    <div class="container-fluid">
+        <a class="text" id="back" href="#"><-- Назад</a>
+        <img src="/static/img/logo1.png" style="height: 70px; width: 100px; margin-left: 300px;" alt="здесь должна была быть картинка, но не нашлась">
+        <p class="text" id="getnick"
+           style="margin-left: 240px; width: 190px">Вы авторизовались как
+            {{nick}}</p>
+    </div>
 </nav>
 
 <div>
     <ul class="nav flex-column">
-      <li class="nav-item">
-        <nav class="nav">
-            <h4 class="text" style="margin-top: 20px">Дата отправления напоминания:</h4>
-            <input type="datetime-local" id="localdate" name="date" class="text" style="margin-top: 20px; margin-left: 20px">
-        </nav>
-      </li>
-        <li>
-            <h4 class="text" style="margin-top: 20px">Тема напоминания:</h4>
-            <textarea class="form-control text" id="exampleFormControlTextarea1" rows="1" style="resize: none; width: 600px"></textarea>
+
+
+        <li class="nav-item">
+            <div style="width:860px;">
+                <h3 class="text"
+                    style="margin-top: 20px;float:left; width:400px;">
+                    Добавление напоминания:</h3>
+                <h3 class="text"
+                    style="margin-top: 20px;float:right;width:350px;">Доступные
+                    напоминания:</h3>
+
+            </div>
+
+
         </li>
-        <li>
-            <h4 class="text" style="margin-top: 20px">Текст напоминания:</h4>
-            <textarea class="form-control text" id="exampleFormControlTextarea12" rows="20" style="resize: none; width: 600px"></textarea>
+        <li class="nav-item">
+            <div style="width:860px;">
+
+
+                <h4 class="text"
+                    style="margin-top: 50px; float:left; width:350px;">Дата и время отправления:</h4>
+                <h4 class="text"
+                    style="margin-top: 50px;float:right; width:350px;">Поиск
+                    напоминания:</h4>
+            </div>
+
         </li>
-        <li>
-            <button type="button" class="btn btn-primary" style="width: 600px; margin-top: 20px">Добавить напоминание</button>
+        <li class="nav-item">
+            <div style="width:1100px;">
+            <input type="datetime-local" id="localdate" name="date" onchange="clearing()" class="text" style="margin-top: 20px;width: 350px;height: 38px;float:left;color: #120a8f;">
+                <input class="form-control text" onkeyup="looking()"
+                       id="lookedit"
+                       style="resize: none; width: 590px;float:right;margin-top: 20px;color: #120a8f;"/>
+                </div>
         </li>
-        <li>
-            <label></label>
+        <li class="nav-item">
+        <div style="width:970px;">
+                <h4 class="text"
+                    style="margin-top: 40px; width: 460px; float:left;">Тема
+                    напоминания:</h4>
+            <div class="nav"
+                     style="margin-top: 20px; width: 460px; float:right;">
+                    <h4 class="text" style="margin-top: 20px">Сортировать
+                        по:</h4>
+                    <select id="showway" class="text" onchange="on_change()"
+                            style="margin-top: 20px; margin-left: 20px">
+                        <option class="text">Дате и времени</option>
+                        <option class="text">Названию</option>
+                    </select>
+                </div>
+
+            </div>
         </li>
+        <li class="nav-item">
+            <div style="width:970px;">
+
+                <input class="form-control text" onkeyup="clearing()" id="linkname"
+                       style="resize: none; width: 460px;float:left;margin-top: 20px;color: #120a8f;"/>
+                            <label style="resize: none; width: 460px;float:right;margin-top: 20px;"></label>
+
+            </div>
+        </li>
+        <li class="nav-item">
+             <div style="width:970">
+                <h4 class="text"
+                    style="margin-top: 20px; width: 470px; float:left;">Текст
+                    напоминания:</h4>
+
+                <button disabled id="delbutton" type="button"
+                        class="btn btn-primary" onclick="deletelink()"
+                        style="width: 600px; margin-top: 20px;float: right;">
+                    Не выбрано ни одного напоминания
+                </button>
+
+            </div>
+        </li>
+        <li class="nav-item">
+            <div style="width:1110px;">
+                <table id="table" border="1" class="tablestyle3"
+                       style="margin-top: 20px;width: 600px;float:right;">
+                    <tr class="trstyle3">
+                        <th class="thstyle3 text cen">Выбрать</th>
+                        <th class="thstyle3 text cen">Дата</th>
+                        <th class="thstyle3 text cen">Тема</th>
+
+
+                    </tr>
+                    {% for i in range(a) %}
+                    <tr>
+                        {% for j in rem[i] %}
+                        {% if j == '-' %}
+                        <td class="thstyle3">
+                            <input type="checkbox" name="cb"
+                                   onchange="checkstate()"
+                                   style="margin-left: 45%">
+                        </td>
+                        {% else %}
+                        <td align="center"
+                            style="text-overflow: ellipsis; overflow: hidden">
+                            {{ j }}
+                        </td>
+                        {% endif %}
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </table>
+
+
+
+            </div>
+            <textarea onkeyup="clearing()" class="form-control text"
+                          rows={{number}} id="linkdata"
+                          style="resize: none; width: 460px;margin-top: 20px;float:left;color: #120a8f;"></textarea>
+
+
+
+        </li>
+        <li class="nav-item">
+            <button disabled id="addlinkbtn" onclick="addlink()"
+                        type="button"
+                        class="btn btn-primary"
+                        style="width: 460px; margin-top: 20px;">
+                    Добавить напоминание
+                </button>
+
+        </li>
+        <li class="nav-item">
+            <span id="message"
+                      style="margin-top: 40px;color:#FF0000;">{{message}}</span>
+        </li>
+
     </ul>
 </div>
 
-<div>
-    <ul class="nav flex-column" style="margin-left: 650px; margin-top: -765px">
-      <li class="nav-item">
-          <h4 class="text">Доступные напоминания:</h4>
-      </li>
-        <li>
-            <h4 class="text" style="margin-top: 20px">Поиск напоминания:</h4>
-            <textarea class="form-control text" id="exampleFormControlTextarea123" rows="1" style="resize: none; width: 460px"></textarea>
-        </li>
-        <li>
-            <nav class="nav">
-                <h4 class="text" style="margin-top: 20px">Сортировать по:</h4>
-                <select class="text" style="margin-top: 20px; margin-left: 20px">
-                    <option class="text">Дата и время</option>
-                    <option class="text">Тема</option>
-                </select>
-            </nav>
-        </li>
-        <li>
-            <table border="1" class="tablestyle2" style="margin-top: 20px;">
-              <tr class="trstyle">
-                <th class="thstyle text cen">Выбрать</th>
-                <th class="thstyle text cen">Дата</th>
-                <th class="thstyle text cen">Время</th>
-                <th class="thstyle text cen">Тема</th>
-              </tr>
-              {% for i in range(a) %}
-              <tr>
-                {% for j in rem[i] %}
-                  {% if j == '-' %}
-                    <td class="thstyle">
-                      <input type="checkbox" style="margin-left: 45%">
-                    </td>
-                  {% else %}
-                  <td style="text-overflow: ellipsis; overflow: hidden" class="cen">
-                    {{ j }}
-                  </td>
-                  {% endif %}
-                {% endfor %}
-              </tr>
-              {% endfor %}
-            </table>
-        </li>
-        <li>
-            <button type="button" class="btn btn-primary" style="width: 460px; margin-top: 20px">Удалить выбранные</button>
-        </li>
-        <li>
-            <label></label>
-        </li>
-    </ul>
-</div>
 
+<script>
+window.history.forward(1);
+
+let work_name = document.querySelector('#getnick').textContent.slice(22).trim();
+document.querySelector('#back').href = "/mainwindow/" + work_name;
+const request = new XMLHttpRequest();
+request.open('GET', '/remindings/' + work_name, false);
+request.send();
+let data = JSON.parse(request.responseText);
+let table = document.querySelector('table');
+let ld0 = data["Дате и времени"];
+for (let i = 1; i <= 100; i++) {
+
+        table.rows[i].style.display = 'none';
+
+    }
+for (let i = 1; i <= ld0.length; i++) {
+    for (let j = 1; j <= 2; j ++) {
+        table.rows[i].style.display = 'table-row';
+
+        table.rows[i].cells[j].innerHTML = ld0[i- 1][j - 1];
+        }
+    }
+if (data["Дате и времени"].length == 0) {
+  document.querySelector('#delbutton').textContent = "Нет доступных напоминаний";
+  document.querySelector('#delbutton').setAttribute("disabled", "true");
+  document.querySelector('#showway').setAttribute("disabled", "true");
+  document.querySelector('#lookedit').setAttribute("readonly", "true");
+
+  table.rows[0].style.display = 'none';
+
+    }
+let timerId = setInterval(send_or_not, 30000);
+
+function checkstate () {
+
+    let cb = document.getElementsByName('cb');
+    let flag = false;
+    for (let i = 0; i < cb.length; i++) {
+        if (cb[i].checked) {
+            flag = true;
+        }
+        }
+    if (flag == true) {
+        document.querySelector('#delbutton').removeAttribute("disabled");
+        document.querySelector('#delbutton').textContent = "Удалить выбранные";
+        }
+    else {
+
+        document.querySelector('#delbutton').setAttribute("disabled", "true");
+        document.querySelector('#delbutton').textContent = "Не выбрано ни одного напоминания";
+    }
+
+}
+
+
+
+function looking () {
+    let x = document.querySelector('#lookedit').value.toLowerCase();
+
+    let n = document.querySelector('#showway')
+    let key = n.options[n.selectedIndex].text;
+    let ld = data["look_data"];
+    let ok_mas = [];
+    let table = document.querySelector('#table');
+
+     for (let i = 1; i <= 100; i++) {
+        //cb[i - 1].checked = false;
+        table.rows[i].style.display = 'none';
+            };
+
+    for (let i = 0; i < ld.length; i++ ){
+            if (ld[i].includes(x)) {
+                ok_mas.push(i);
+        }
+    };
+    let norm_mas = [];
+
+    for (let i = 0; i < ok_mas.length; i++) {
+        norm_mas.push(ok_mas[i]);
+        };
+    let final_mas = [];
+     for (let i = 0; i < norm_mas.length; i++) {
+        final_mas.push(data[key][norm_mas[i]]);
+        };
+
+  document.querySelector('#delbutton').textContent = "Нет напоминаний, удовлетворяющих поиску";
+  document.querySelector('#delbutton').setAttribute("disabled", "true");
+
+
+  document.querySelector('#showway').setAttribute("disabled", true);
+  table.rows[0].style.display = 'none';
+
+  for (let i = 0; i < final_mas.length; i++) {
+
+     document.querySelector('#delbutton').removeAttribute("hidden");
+
+
+    table.rows[i + 1].style.display = 'table-row';
+    table.rows[0].style.display = 'table-row';
+
+    // document.querySelector('#openbutton').removeAttribute("disabled");
+
+    document.querySelector('#showway').removeAttribute("disabled", true);
+
+
+    document.querySelector('#delbutton').textContent = "Не выбрано ни одного напоминания"
+
+
+    for (let j = 1; j <= 2; j ++) {
+    table.rows[i + 1].style.display = 'table-row';
+
+    table.rows[i + 1].cells[j].innerHTML = final_mas[i][j - 1];
+    }
+};
+   clearing();
+   if (final_mas.length > 0) {
+                document.querySelector('#delbutton').textContent = "Не выбрано ни одного напоминания";
+                document.querySelector('#delbutton').disabled = true;
+}
+   else {
+       document.querySelector('#delbutton').textContent = "Нет напоминаний, удовлетворяющих поиску";
+                document.querySelector('#delbutton').disabled = true;
+
+    }
+   return final_mas.length;
+
+};
+
+function on_change() {
+
+    let table = document.querySelector('#table');
+
+    for (let i = 0; i < 100; i++) {
+        table.rows[i + 1].style.display = 'none';
+    }
+
+    let n = document.querySelector('#showway')
+    key = n.options[n.selectedIndex].text;
+    let ld0 = data[key];
+
+    for (let i = 1; i <= ld0.length; i++) {
+        for (let j = 1; j <= 2; j ++) {
+            table.rows[i].style.display = 'table-row';
+            table.rows[i].cells[j].innerHTML = ld0[i- 1][j - 1];
+        }
+    }
+
+};
+
+function clearing () {
+      document.querySelector('#message').textContent = "";
+
+      if (document.querySelector('#linkdata').value == "" || document.querySelector('#linkname').value == "" || document.querySelector('#localdate').value == ""){
+          document.querySelector('#addlinkbtn').disabled = true;
+      } else {
+        document.querySelector('#addlinkbtn').disabled = false;
+      }
+
+      };
+
+function send_or_not() {
+
+  let uri = "/send_or_not/" + work_name;
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', uri, true);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      var result = xhr.responseText;
+
+      if (result == "false") {
+      if (document.querySelector('#linkdata').value == "" && document.querySelector('#linkname').value == ""){
+        window.location.reload();
+      }
+      }
+
+
+
+      //do what you want with the image name returned
+      //e.g update the interface
+    }
+  };
+  xhr.send();
+}
+
+function addlink () {
+    let n = document.querySelector('#showway')
+    let key = n.options[n.selectedIndex].text;
+    let cb = document.getElementsByName('cb');
+  var uri = "/remindings/adding";
+  var xhr = new XMLHttpRequest();
+  var fd = new FormData();
+  xhr.open('POST', uri, true);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      let result = xhr.responseText;
+      document.querySelector('#message').textContent = result;
+
+      if (result == ""){
+            window.location.reload();
+            }
+
+
+
+
+      //do what you want with the image name returned
+      //e.g update the interface
+    }
+  };
+
+  fd.append('date',  document.querySelector('#localdate').value);
+  fd.append('email', work_name);
+  fd.append('theme', document.querySelector('#linkname').value);
+  fd.append('text', document.querySelector('#linkdata').value);
+  xhr.send(fd);
+};
+function deletelink () {
+    let n = document.querySelector('#showway')
+    let key = n.options[n.selectedIndex].text;
+    let cb = document.getElementsByName('cb');
+    let mas = []
+    for (let i = 0; i < looking(); i++) {
+        if (cb[i].checked) {
+            mas.push(data[key][i].join("+-+"));
+        }
+    }
+  var uri = "/remindings/deleting";
+  var xhr = new XMLHttpRequest();
+  var fd = new FormData();
+  xhr.open('POST', uri, true);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      var result = xhr.responseText;
+      if (result == "deleted"){
+            window.location.reload();}
+      else {
+            document.querySelector('#message').textContent = result;
+
+      }
+
+
+
+      //do what you want with the image name returned
+      //e.g update the interface
+    }
+  };
+  fd.append('date', mas.join("___===___"));
+  fd.append('email', work_name);
+  xhr.send(fd);
+};
+</script>
 {% endblock %}

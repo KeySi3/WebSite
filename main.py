@@ -1,4 +1,5 @@
 import smtplib
+from datetime import datetime
 import time
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -338,6 +339,7 @@ def register():
         return redirect('/')
     return render_template('registration.html', title='Регистрация', form=form)
 
+
 @app.route("/app_reistration", methods=["POST"])
 def app_registration():
     if request.method == 'POST':
@@ -387,11 +389,11 @@ def password_level(password):
     elif letters and numbers and not up:
         return False, "Добавьте в пароль заглавных букв"
     elif letters and up and not numbers:
-        return False, "Добавьтев пароль цифр"
+        return False, "Добавьте в пароль цифр"
     elif numbers and up and not letters:
         return False, "Добавьте в пароль строчных букв"
     elif numbers and not letters and not up:
-        return False, "Добавьтев пароль  букв разных регистров"
+        return False, "Добавьте в пароль  букв разных регистров"
     elif letters and not numbers and not up:
         return False, "Добавьте в пароль цифр и заглавных букв"
     else:
